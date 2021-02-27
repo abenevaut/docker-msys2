@@ -21,5 +21,4 @@ RUN bash -l -c "pacman -Syuu --needed --noconfirm --noprogressbar" && \
 	bash -l -c "pacman --noconfirm -S tar zip unzip && rm -r /var/cache/pacman/pkg/*"
 
 ENV MSYSTEM=MSYS
-
-CMD ["bash", "-l"]
+CMD ["bash"]
