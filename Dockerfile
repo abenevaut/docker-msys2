@@ -1,14 +1,14 @@
 ARG WINDOWS_VERSION=20H2-KB4601319
-ARG MSYS_DOWNLOAD_URL=https://api.github.com/repos/msys2/msys2-installer/releases/latest
 FROM mcr.microsoft.com/windows/servercore:$WINDOWS_VERSION
 
 # Download msys2
 SHELL ["powershell"]
 ARG MSYS_DOWNLOAD_URL
-RUN curl.exe -L $(Invoke-RestMethod -UseBasicParsing $env:MSYS_DOWNLOAD_URL | \
-	Select -ExpandProperty "assets" | \
-	Select -ExpandProperty "browser_download_url" | \
-	Select-String -Pattern '.sfx.exe$').ToString() --output C:\\windows\\temp\\msys2-base.exe ; \
+RUN curl.exe -L $(Invoke-RestMethod -UseBasicParsing https://api.github.com/repos/msys2/msys2-installer/releases/latest | \
+		Select -ExpandProperty "assets" | \
+		Select -ExpandProperty "browser_download_url" | \
+		Select-String -Pattern '.sfx.exe$').ToString() \
+		--output C:\\windows\\temp\\msys2-base.exe ; \
 	C:\\windows\\temp\\msys2-base.exe ; \
 	del C:\\windows\\temp\\msys2-base.exe
 
