@@ -1,32 +1,43 @@
 # MSYS2 Docker image under Windows
-This is an attemp to bring the latest [MSYS2](https://www.msys2.org) base under under Microsoft Windows Server Docker image, intended to be used in my own projects.
+This is an attemp to bring the latest [MSYS2](https://www.msys2.org) base under under Microsoft® Windows® Server Docker image, intended to be used in my own projects.
 
 Currently, only [Server Core](https://hub.docker.com/_/microsoft-windows-servercore) is supported, as MSYS executables are unable to run under [Nano Server](https://hub.docker.com/_/microsoft-windows-nanoserver). 
+
+## Tags
+The tags belong to the Windows version. Available tags are:
+
+* ``20H2``
+* ``2004`` (``latest``)
+* ``1909``
+* ``1903``
+* ``ltsc2019``
+
+It is recommended to use the tag corresponding to your host version.
 
 ## Usage
 MSYS (default) interactive shell
 ```
-docker run -it --volume=host-src:container-dest --workdir="container-dest" amitie10g/mingw-w64-toolchain
+docker run -it --volume=host-src:container-dest --workdir="container-dest" amitie10g/msys2
 ```
 
 MinGW64 interactive shell
 ```
-docker run -e MSYSTEM=MINGW64 --volume=host-src:container-dest --workdir="container-dest" amitie10g/mingw-w64-toolchain
+docker run -e MSYSTEM=MINGW64 --volume=host-src:container-dest --workdir="container-dest" amitie10g/msys2
 ```
 
 MinGW32 interactive shell
 ```
-docker run -e MSYSTEM=MINGW32 --volume=host-src:container-dest --workdir="container-dest" amitie10g/mingw-w64-toolchain
+docker run -e MSYSTEM=MINGW32 --volume=host-src:container-dest --workdir="container-dest" amitie10g/msys2
 ```
 
 CMD interactive shell
 ```
-docker run --volume=host-src:container-dest --workdir="container-dest" amitie10g/mingw-w64-toolchain cmd
+docker run --volume=host-src:container-dest --workdir="container-dest" amitie10g/msys2 cmd
 ```
 
 Powershell interactive shell
 ```
-docker run --volume=host-src:container-dest --workdir="container-dest" amitie10g/mingw-w64-toolchain powershell
+docker run --volume=host-src:container-dest --workdir="container-dest" amitie10g/msys2 powershell
 ```
 
 You may use the shell of your preference by issuing your alternative CMD. For instance, Bash (``bash``) is the default CMD and shell; you may choose the Windows CMD (``cmd``) or Powershell (``powershell``)
@@ -36,20 +47,18 @@ If you want to use the MinGW32 environment, you must append ``C:\msys64\mingw32\
 The default workdir is ``C:\msys64``. Set another workdir is recommended only for runing non-interactive building process like ``make``.
 
 ## Using this base image
-If you're want to install packages under mingw32 or mingw64 environment, add the following in your Dockerfile, in order to set the proper PATH environment:
+Dockerfile
+```
+ARG WINDOWS_VERSION=latest
+FROM amitie10g/msys2:$WINDOWS_VERSION
 
-```RUN setx path "C:\msys64\mingw64\bin;%PATH%"```
+<your code>
+```
 
-If you prefer to use an Entrypoint script, set the PATH environment as following:
-
-```setx path "C:\msys64\mingw64\bin;%PATH%"```
-
-## Windows Server version tags:
-
-* ``latest`` (20H2-KB4601319)
-* ``20H2`` (20H2)
-* ``ltsc`` (ltsc2019)
-* <s>``insider`` (10.0.20295.1)</s>
+Command line
+```
+docker build --build-arg WINDOWS_VERSION=20H2 -t <your tag> .
+```
 
 ## Licensing
 * The **Dockerfile** has been released into the **public domain** (the Unlicense)
