@@ -1,8 +1,8 @@
-ARG WINDOWS_VERSION=1903
+ARG WINDOWS_VERSION=2004
 FROM mcr.microsoft.com/windows/servercore:$WINDOWS_VERSION
 
 # Set environment
-RUN setx path "C:\msys64\usr\local\bin;C:\msys64\usr\bin;C:\msys64\bin;C:\msys64\usr\bin\site_perl;C:\msys64\usr\bin\vendor_perl;C:\msys64\usr\bin\core_perl;%PATH%"
+RUN setx path "C:\msys64\usr\local\bin;C:\msys64\usr\bin;C:\msys64\bin;C:\msys64\usr\bin\site_perl;C:\msys64\usr\bin\vendor_perl;C:\msys64\usr\bin\core_perl;%PATH%"	
 
 # Download msys2
 RUN	powershell -Command " \
@@ -19,6 +19,11 @@ RUN	powershell -Command " \
 	bash -l -c "pacman --noconfirm -S tar zip unzip" && \
 	bash -l -c "rm -r /var/cache/pacman/pkg/*"
 
-WORKDIR C:\\msys64
+# Create directories
+RUN bash -c "rm -fr /C/Users/ContainerUser/*" && \
+	mklink /J C:\\msys64\\home\\ContainerUser C:\\Users\\ContainerUser && \
+	setx HOME  "C:\msys64\home\ContainerUser"
+
+WORKDIR C:\\msys64\\home\\ContainerUser\\
 ENV MSYSTEM=MSYS
-CMD ["bash"]
+CMD ["bash", "-l"]
