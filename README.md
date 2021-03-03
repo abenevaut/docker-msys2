@@ -60,6 +60,9 @@ Command line
 docker build --build-arg WINDOWS_VERSION=20H2 -t <your tag> .
 ```
 
+## Caveats
+Due the Windows Server Core base image, this image is HUGE. I'm researching how to use Nano Server instead.
+
 ## Licensing
 * The **Dockerfile** has been released into the **public domain** (the Unlicense)
 * The Docker image usages are subjected to the **[Microsoft EULA](https://docs.microsoft.com/en-us/virtualization/windowscontainers/images-eula)**
