@@ -6,8 +6,9 @@ Currently, only [Server Core](https://hub.docker.com/_/microsoft-windows-serverc
 ## Tags
 The tags belong to the Windows version. Available tags are:
 
-* ``20H2``
-* ``2004`` (``latest``)
+* * ``ltsc2022``
+* ``20H2`` (``latest``)
+* ``2004``
 * ``1909``
 * ``1903``
 * ``ltsc2019``
