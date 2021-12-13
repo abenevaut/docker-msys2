@@ -1,4 +1,4 @@
-ARG WINDOWS_VERSION=ltsc2019
+ARG WINDOWS_VERSION=20H2
 FROM mcr.microsoft.com/windows/servercore:$WINDOWS_VERSION
 
 # Set environment
