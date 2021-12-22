@@ -1,5 +1,5 @@
-ARG WINDOWS_VERSION=20H2
-FROM mcr.microsoft.com/windows/servercore:$WINDOWS_VERSION
+ARG VERSION=20H2
+FROM mcr.microsoft.com/windows/servercore:$VERSION
 
 # Set environment
 RUN	setx path "C:\msys64\usr\local\bin;C:\msys64\usr\bin;C:\msys64\bin;C:\msys64\usr\bin\site_perl;C:\msys64\usr\bin\vendor_perl;C:\msys64\usr\bin\core_perl;%PATH%"	
