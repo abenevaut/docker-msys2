@@ -12,7 +12,7 @@ RUN	powershell -Command " \
 			Select-String -Pattern '.sfx.exe$').ToString() \
 			--output C:\\windows\\temp\\msys2-base.exe \
 	" && \
-	C:\\windows\\temp\\msys2-base.exe && del C:\\windows\\temp\\msys2-base.exe \
+	C:\\windows\\temp\\msys2-base.exe && \
 	bash -l -c "pacman -Syuu --needed --noconfirm --noprogressbar" && \
 	bash -l -c "pacman -Syu --needed --noconfirm --noprogressbar" && \
 	bash -l -c "pacman -Sy --needed --noconfirm --noprogressbar"
