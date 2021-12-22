@@ -2,7 +2,7 @@ ARG VERSION=20H2
 FROM mcr.microsoft.com/windows/servercore:$VERSION
 
 # Set environment
-RUN	setx path "C:\msys64\usr\local\bin;C:\msys64\usr\bin;C:\msys64\bin;C:\msys64\usr\bin\site_perl;C:\msys64\usr\bin\vendor_perl;C:\msys64\usr\bin\core_perl;C:\msys64\clang32\bin;C:\msys64\clang64\bin;C:\msys64\clangarm64\bin;C:\msys64\mingw32\bin;C:\msys64\mingw64\bin\bin;C:\msys64\ucrt64\bin;%PATH%"	
+RUN	setx path "C:\msys64\clang32\bin;C:\msys64\clang64\bin;C:\msys64\clangarm64\bin;C:\msys64\mingw32\bin;C:\msys64\mingw64\bin\bin;C:\msys64\ucrt64\bin;C:\msys64\usr\local\bin;C:\msys64\usr\bin;C:\msys64\bin;C:\msys64\usr\bin\site_perl;C:\msys64\usr\bin\vendor_perl;C:\msys64\usr\bin\core_perl;%PATH%"	
 
 # Download msys2
 RUN	powershell -Command " \
