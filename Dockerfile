@@ -1,5 +1,5 @@
 ARG VERSION=20H2
-FROM mcr.microsoft.com/windows/servercore:$VERSION AS downloader
+FROM mcr.microsoft.com/windows/servercore:$VERSION
 
 # Set environment
 RUN	setx path "C:\msys64\usr\local\bin;C:\msys64\usr\bin;C:\msys64\bin;C:\msys64\usr\bin\site_perl;C:\msys64\usr\bin\vendor_perl;C:\msys64\usr\bin\core_perl;%PATH%"	
@@ -14,14 +14,11 @@ RUN	powershell -Command " \
 	" && \
 	C:\\windows\\temp\\msys2-base.exe
 
-FROM downloader AS updater
 RUN	bash -l -c "pacman -Syuu --needed --noconfirm --noprogressbar" && \
-	bash -l -c "pacman -Syu --needed --noconfirm --noprogressbar" && \
-	bash -l -c "pacman -Sy --needed --noconfirm --noprogressbar"
+	bash -l -c "pacman -Syu --needed --noconfirm --noprogressbar"
 
 # Create directories and cleanup
-FROM updater
-RUN	bash -c "rm -fr /C/Users/ContainerUser/* /var/cache/pacman/pkg/*" && \
+RUN	bash -c "rm -fr /C/Users/ContainerUser/* /var/cache/pacman/pkg/* /C/Windows/Temp/*" && \
 	mklink /J C:\\msys64\\home\\ContainerUser C:\\Users\\ContainerUser && \
 	setx HOME  "C:\msys64\home\ContainerUser"
 
