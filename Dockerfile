@@ -1,4 +1,4 @@
-ARG VERSION=20H2
+ARG VERSION=21H2
 FROM mcr.microsoft.com/windows/servercore:$VERSION
 
 # Set environment
