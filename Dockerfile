@@ -1,4 +1,4 @@
-ARG VERSION=21H2
+ARG VERSION=ltsc2022
 FROM mcr.microsoft.com/windows/servercore:$VERSION
 
 # Set environment
