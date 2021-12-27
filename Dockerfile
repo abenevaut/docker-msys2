@@ -14,8 +14,8 @@ RUN	powershell -Command " \
 	" && \
 	C:\\windows\\temp\\msys2-base.exe
 
-RUN	bash -l -c "pacman -Syuu --needed --noconfirm --noprogressbar" && \
-	bash -l -c "pacman -Syu --needed --noconfirm --noprogressbar"
+RUN	bash -l -c "pacman -Syuu --needed --noconfirm --noprogressbar"
+RUN	bash -l -c "pacman -Syu --needed --noconfirm --noprogressbar"
 
 # Create directories and cleanup
 RUN	bash -c "rm -fr /C/Users/ContainerUser/* /var/cache/pacman/pkg/* /C/Windows/Temp/*" && \
