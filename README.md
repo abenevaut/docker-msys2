@@ -6,8 +6,8 @@ Currently, only [Server Core](https://hub.docker.com/_/microsoft-windows-serverc
 ## Tags
 The tags belong to the Windows version. Available tags are:
 
-* * ``ltsc2022``
-* ``20H2`` (``latest``)
+* ``21H2`` (``latest``)
+* ``20H2`` 
 * ``2004``
 * ``1909``
 * ``1903``
@@ -67,3 +67,4 @@ Due the Windows Server Core base image, this image is HUGE. I'm researching how 
 ## Licensing
 * The **Dockerfile** has been released into the **public domain** (the Unlicense)
 * The Docker image usages are subjected to the **[Microsoft EULA](https://docs.microsoft.com/en-us/virtualization/windowscontainers/images-eula)**
+* The Dockerfile itself is released into the Public domain (the Unlicense)
