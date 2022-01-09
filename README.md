@@ -3,18 +3,6 @@ This is an attemp to bring the latest [MSYS2](https://www.msys2.org) base under 
 
 Currently, only [Server Core](https://hub.docker.com/_/microsoft-windows-servercore) is supported, as MSYS executables are unable to run under [Nano Server](https://hub.docker.com/_/microsoft-windows-nanoserver). 
 
-## Tags
-The tags belong to the Windows version. Available tags are:
-
-* ``21H2`` (``latest``)
-* ``20H2`` 
-* ``2004``
-* ``1909``
-* ``1903``
-* ``ltsc2019``
-
-It is recommended to use the tag corresponding to your host version.
-
 ## Usage
 MSYS (default) interactive shell
 ```
@@ -50,15 +38,15 @@ The default workdir is ``C:\msys64``. Set another workdir is recommended only fo
 ## Using this base image
 Dockerfile
 ```
-ARG WINDOWS_VERSION=latest
-FROM amitie10g/msys2:$WINDOWS_VERSION
+ARG VERSION=21H2
+FROM amitie10g/msys2:$VERSION
 
 <your code>
 ```
 
 Command line
 ```
-docker build --build-arg WINDOWS_VERSION=20H2 -t <your tag> .
+docker build --build-arg WINDOWS_VERSION=21H2 -t <your tag> .
 ```
 
 ## Caveats
@@ -67,4 +55,3 @@ Due the Windows Server Core base image, this image is HUGE. I'm researching how 
 ## Licensing
 * The **Dockerfile** has been released into the **public domain** (the Unlicense)
 * The Docker image usages are subjected to the **[Microsoft EULA](https://docs.microsoft.com/en-us/virtualization/windowscontainers/images-eula)**
-* The Dockerfile itself is released into the Public domain (the Unlicense)
