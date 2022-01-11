@@ -1,5 +1,6 @@
 ARG VERSION=ltsc2022
 
+# Use 21H2 version due previous Windows versions caused the building process hang.
 FROM mcr.microsoft.com/windows/servercore:ltsc2022 AS download
 
 # Download msys2
