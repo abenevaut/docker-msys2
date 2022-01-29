@@ -1,7 +1,7 @@
 # MSYS2 Docker image under Windows
 This is an attemp to bring the latest [MSYS2](https://www.msys2.org) base under under Microsoft® Windows® Server Docker image, intended to be used in my own projects.
 
-Currently, only [Server Core](https://hub.docker.com/_/microsoft-windows-servercore) is supported, as MSYS executables are unable to run under [Nano Server](https://hub.docker.com/_/microsoft-windows-nanoserver). 
+Currently, only [Server Core](https://hub.docker.com/_/microsoft-windows-servercore) is supported, as MSYS executables are unable to run under [Nano Server](https://hub.docker.com/_/microsoft-windows-nanoserver); please see [this issue](https://github.com/msys2/MSYS2-packages/issues/1493) for further information.
 
 ## Usage
 MSYS (default) interactive shell
@@ -54,4 +54,5 @@ Due the Windows Server Core base image, this image is HUGE. I'm researching how 
 
 ## Licensing
 * The **Dockerfile** has been released into the **public domain** (the Unlicense)
-* The Docker image usages are subjected to the **[Microsoft EULA](https://docs.microsoft.com/en-us/virtualization/windowscontainers/images-eula)**
+* The MSYS2 packages are licensed under several licenses. Please refer to them
+* The Windows-based container base image usage is subjected to the **[Microsoft EULA](https://docs.microsoft.com/en-us/virtualization/windowscontainers/images-eula)**
