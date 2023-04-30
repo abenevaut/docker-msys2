@@ -3,7 +3,7 @@
 require 'docker'
 require 'serverspec'
 
-describe 'Dockerfile.ci' do
+describe 'Dockerfile' do
   before(:all) do # rubocop:disable RSpec/BeforeAfterAll
     ::Docker.options[:read_timeout] = 3000
 
