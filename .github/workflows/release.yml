@@ -19,7 +19,8 @@ jobs:
       - name: Get current release tag
         id: branch-name
         run: |
-          echo "SOURCE_TAG=${env:GITHUB_REF#refs/tags/docker-}" >> $env:GITHUB_OUTPUT
+          $tag = $env:GITHUB_REF -replace "refs/tags/docker-", ""
+          echo "SOURCE_TAG=$tag" >> $env:GITHUB_OUTPUT
         shell: pwsh
 
       - name: Build docker image abenevaut/msys2
