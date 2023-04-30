@@ -1,0 +1,13 @@
+version: 2
+updates:
+
+- package-ecosystem: docker
+  schedule:
+    interval: monthly
+    time: "12:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 3
+  target-branch: master
+  labels:
+    - dependencies
+    - dep:docker
