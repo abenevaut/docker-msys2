@@ -39,6 +39,6 @@ describe 'Dockerfile' do
   end
 
   it 'installs bash' do
-    expect(bash_version).to include('5.1.16')
+    expect(bash_version).to include('5.2.15')
   end
 end
