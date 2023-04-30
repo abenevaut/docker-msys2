@@ -12,8 +12,8 @@ describe 'Dockerfile' do
     image = ::Docker::Image.build_from_dir(
       '.',
       'dockerfile' => 'Dockerfile',
-      't' => 'abenevaut/docker-msys2:rspec',
-      'cache-from' => 'abenevaut/docker-msys2:latest-windows10'
+      't' => 'abenevaut/msys2:rspec',
+      'cache-from' => 'abenevaut/msys2:latest-windows10'
     )
 
     set :os, family: :windows
