@@ -1,6 +1,5 @@
 ARG VERSION=ltsc2019
 
-# Use 21H2 version due previous Windows versions caused the building process hang.
 FROM mcr.microsoft.com/windows/servercore:ltsc2019 AS download
 
 LABEL maintainer="Antoine Benevaut <me@abenevaut.dev>"
@@ -17,6 +16,7 @@ RUN	setx /M path "%PATH%;C:\msys64\usr\local\bin;C:\msys64\usr\bin;C:\msys64\bin
 
 RUN	bash -l -c "pacman -Syuu --needed --noconfirm --noprogressbar" && \
 	bash -l -c "pacman -Syu --needed --noconfirm --noprogressbar" && \
+	bash -l -c "pacman -S base-devel msys2-devel mingw-w64-{i686,x86_64}-toolchain --needed --noconfirm --noprogressbar" && \
 	bash -l -c "rm -fr /C/Users/ContainerUser/* /var/cache/pacman/pkg/*"
 
 FROM mcr.microsoft.com/windows/servercore:$VERSION
@@ -29,4 +29,4 @@ RUN setx /M path "%PATH%;C:\msys64\usr\local\bin;C:\msys64\usr\bin;C:\msys64\bin
 	setx HOME "C:\msys64\home\ContainerUser"
 
 WORKDIR C:\\msys64\\home\\ContainerUser\\
-CMD ["bash", "-l"]
+

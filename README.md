@@ -56,3 +56,16 @@ Due the Windows Server Core base image, this image is HUGE. I'm researching how 
 * The **Dockerfile** has been released into the **public domain** (the Unlicense)
 * The MSYS2 packages are licensed under several licenses. Please refer to them
 * The Windows-based container base image usage is subjected to the **[Microsoft EULA](https://docs.microsoft.com/en-us/virtualization/windowscontainers/images-eula)**
+
+
+
+
+msys2 requirement + ruby on windows
+
+```
+pacman -S base-devel msys2-devel mingw-w64-{i686,x86_64}-toolchain
+```
+
+run tests on windows
+
+DOCKER_HOST=tcp://127.0.0.1:2375 bundle exec rspec
