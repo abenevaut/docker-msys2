@@ -11,3 +11,14 @@ updates:
   labels:
     - dependencies
     - dep:docker
+
+- package-ecosystem: docker
+  schedule:
+    interval: monthly
+    time: "12:00"
+    timezone: Europe/Paris
+  open-pull-requests-limit: 3
+  target-branch: windows10
+  labels:
+    - dependencies
+    - dep:docker
