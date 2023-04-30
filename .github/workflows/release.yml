@@ -5,6 +5,9 @@ on:
     tags:
       - docker-*
 
+env:
+  windows_version: 10
+
 jobs:
 
   build:
@@ -17,18 +20,10 @@ jobs:
         id: branch-name
         run: echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/docker-}
 
-      - name: Build docker image abenevaut/yafarel
+      - name: Build docker image abenevaut/msys2
         run: |
           docker login -u ${{ secrets.ABENEVAUT_DOCKER_USERNAME }} -p ${{ secrets.ABENEVAUT_DOCKER_PASSWORD }}
-          docker pull abenevaut/yafarel:latest-php${{ env.php_version }}
-          docker build . --file Dockerfile.yaf --tag abenevaut/yafarel:${{ steps.branch-name.outputs.SOURCE_TAG }}-php${{ env.php_version }} --cache-from abenevaut/yafarel:latest-php${{ env.php_version }}
-          docker tag abenevaut/yafarel:${{ steps.branch-name.outputs.SOURCE_TAG }}-php${{ env.php_version }} abenevaut/yafarel:latest-php${{ env.php_version }}
-          docker push --all-tags abenevaut/yafarel
-
-      - name: Build docker image abenevaut/yafarel-ci
-        run: |
-          docker login -u ${{ secrets.ABENEVAUT_DOCKER_USERNAME }} -p ${{ secrets.ABENEVAUT_DOCKER_PASSWORD }}
-          docker pull abenevaut/yafarel-ci:latest-php${{ env.php_version }}
-          docker build . --file Dockerfile.ci --tag abenevaut/yafarel-ci:${{ steps.branch-name.outputs.SOURCE_TAG }}-php${{ env.php_version }} --cache-from abenevaut/yafarel-ci:latest-php${{ env.php_version }}
-          docker tag abenevaut/yafarel-ci:${{ steps.branch-name.outputs.SOURCE_TAG }}-php${{ env.php_version }} abenevaut/yafarel-ci:latest-php${{ env.php_version }}
-          docker push --all-tags abenevaut/yafarel-ci
+          docker pull abenevaut/msys2:latest-windows${{ env.windows_version }}
+          docker build . --file Dockerfile --tag abenevaut/msys2:${{ steps.branch-name.outputs.SOURCE_TAG }}-windows${{ env.windows_version }} --cache-from abenevaut/msys2:latest-windows${{ env.windows_version }}
+          docker tag abenevaut/msys2:${{ steps.branch-name.outputs.SOURCE_TAG }}-windows${{ env.windows_version }} abenevaut/msys2:latest-windows${{ env.windows_version }}
+          docker push --all-tags abenevaut/msys2
