@@ -3,6 +3,8 @@ ARG VERSION=ltsc2019
 # Use 21H2 version due previous Windows versions caused the building process hang.
 FROM mcr.microsoft.com/windows/servercore:ltsc2019 AS download
 
+LABEL maintainer="Antoine Benevaut <me@abenevaut.dev>"
+
 # Download msys2
 RUN	setx /M path "%PATH%;C:\msys64\usr\local\bin;C:\msys64\usr\bin;C:\msys64\bin;C:\msys64\usr\bin\site_perl;C:\msys64\usr\bin\vendor_perl;C:\msys64\usr\bin\core_perl" && \
 	powershell -Command "curl.exe -L \
