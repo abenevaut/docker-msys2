@@ -13,7 +13,7 @@ describe 'Dockerfile' do
       '.',
       'dockerfile' => 'Dockerfile',
       't' => 'abenevaut/msys2:rspec',
-      'cache-from' => 'abenevaut/msys2:latest-windows10'
+      'cache-from' => 'abenevaut/msys2:latest-windows11'
     )
 
     set :os, family: :windows

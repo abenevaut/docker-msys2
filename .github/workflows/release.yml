@@ -6,12 +6,12 @@ on:
       - docker-*
 
 env:
-  windows_version: 10
+  windows_version: 11
 
 jobs:
 
   build:
-    runs-on: windows-2019
+    runs-on: windows-2022
     steps:
 
       - uses: actions/checkout@v1

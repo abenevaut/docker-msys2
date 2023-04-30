@@ -1,6 +1,6 @@
-ARG VERSION=ltsc2019
+ARG VERSION=ltsc2022
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2019 AS downloader
+FROM mcr.microsoft.com/windows/servercore:ltsc2022 AS downloader
 
 # Download msys2
 RUN	setx /M path "%PATH%;C:\msys64\usr\local\bin;C:\msys64\usr\bin;C:\msys64\bin;C:\msys64\usr\bin\site_perl;C:\msys64\usr\bin\vendor_perl;C:\msys64\usr\bin\core_perl" \
