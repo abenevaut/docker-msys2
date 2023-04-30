@@ -1,0 +1,21 @@
+require:
+  - rubocop-rspec
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/*.rb'
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/*.rb'
+RSpec/RepeatedExampleGroupBody:
+  Exclude:
+    - 'spec/*.rb'
+RSpec/NamedSubject:
+  Exclude:
+    - 'spec/*.rb'
+Metrics/LineLength:
+  Exclude:
+    - 'spec/*.rb'
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/*.rb'

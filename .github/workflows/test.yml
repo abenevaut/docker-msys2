@@ -1,0 +1,45 @@
+name: test
+
+on:
+  push:
+    branches: [ master, windows10 ]
+  pull_request:
+    branches: [ master, windows10 ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - run: docker pull hadolint/hadolint
+
+      - name: lint Dockerfile
+        run: docker run --rm -i hadolint/hadolint < Dockerfile
+
+  test:
+    runs-on: windows-2019
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Run tests
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bundle exec rubocop
+          bundle exec rspec
