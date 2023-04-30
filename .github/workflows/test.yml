@@ -20,7 +20,7 @@ jobs:
         run: docker run --rm -i hadolint/hadolint < Dockerfile
 
   test:
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
     steps:
 
       - uses: actions/checkout@v2
