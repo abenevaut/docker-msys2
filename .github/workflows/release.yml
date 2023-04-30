@@ -19,7 +19,7 @@ jobs:
       - name: Get current release tag
         id: branch-name
         run: |
-          $tag = $env:GITHUB_REF -replace "refs/tags/docker-", ""
+          $tag = $env:GITHUB_REF -replace "refs/tags/docker-w${{ env.windows_version }}-", ""
           echo "SOURCE_TAG=$tag" >> $env:GITHUB_OUTPUT
         shell: pwsh
 
