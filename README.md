@@ -3,6 +3,12 @@ Latest [MSYS2](https://www.msys2.org) based under Microsoft® Windows® Server D
 
 Currently, only [Server Core](https://hub.docker.com/_/microsoft-windows-servercore) is supported, as MSYS executables are unable to run under [Nano Server](https://hub.docker.com/_/microsoft-windows-nanoserver); please see [this issue](https://github.com/msys2/MSYS2-packages/issues/1493) for further information.
 
+## Release
+| servercore tag | release tag                |
+|----------------|----------------------------|
+| ltsc2022   | latest OR latest-windows11 |
+| ltsc2019   | latest-windows10           |
+
 ## Usage
 MSYS (default) interactive shell
 
@@ -43,7 +49,7 @@ docker run abenevaut/msys2 powershell
 ## Extending base image
 Servercore `ltsc2022` - Windows 11 compatible build
 ```
-FROM abenevaut/msys2:latest-windows11
+FROM abenevaut/msys2:latest
 
 RUN bash -l -c "pacman -S base-devel msys2-devel mingw-w64-{i686,x86_64}-toolchain --needed --noconfirm --noprogressbar"
 ```

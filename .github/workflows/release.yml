@@ -29,4 +29,5 @@ jobs:
           docker pull abenevaut/msys2:latest-windows${{ env.windows_version }}
           docker build . --file Dockerfile --tag abenevaut/msys2:${{ steps.branch-name.outputs.SOURCE_TAG }}-windows${{ env.windows_version }} --cache-from abenevaut/msys2:latest-windows${{ env.windows_version }}
           docker tag abenevaut/msys2:${{ steps.branch-name.outputs.SOURCE_TAG }}-windows${{ env.windows_version }} abenevaut/msys2:latest-windows${{ env.windows_version }}
+          docker tag abenevaut/msys2:${{ steps.branch-name.outputs.SOURCE_TAG }}-windows${{ env.windows_version }} abenevaut/msys2:latest
           docker push --all-tags abenevaut/msys2
