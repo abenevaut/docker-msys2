@@ -61,6 +61,10 @@ FROM abenevaut/msys2:latest-windows10
 RUN bash -l -c "pacman -S base-devel msys2-devel mingw-w64-{i686,x86_64}-toolchain --needed --noconfirm --noprogressbar"
 ```
 
+See also:
+- [Install Build Tools into a container](https://learn.microsoft.com/en-us/visualstudio/install/build-tools-container?view=vs-2022)
+- [MSYS2 Pacman package management](https://www.msys2.org/docs/package-management/)
+
 ## Build
 ```
 docker build --build-arg VERSION=ltsc2019 -t <your tag> .
