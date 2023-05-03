@@ -12,13 +12,13 @@ describe 'Dockerfile' do
     image = ::Docker::Image.build_from_dir(
       '.',
       {
-        'build-arg' => "SERVERCORE_TAG=ltsc2019",
+        'build-arg' => "SERVERCORE_TAG=#{ENV['SERVERCORE_TAG'] || 'ltsc2022'}",
         't' => 'abenevaut/msys2:rspec',
         'cache-from' => 'abenevaut/msys2:cache'
       }
     )
 
-    set :os, :family => 'windows'
+    set :os, family => 'windows'
     set :backend, :cmd
     set :docker_image, image.id
   end
