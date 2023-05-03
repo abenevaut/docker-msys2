@@ -42,7 +42,7 @@ jobs:
           docker tag abenevaut/msys2:${{ steps.branch-name.outputs.SOURCE_TAG }}-w${{ matrix.windows_version }} abenevaut/msys2:latest-w${{ matrix.windows_version }}
 
       - name: Tag latest
-        - if: ${{ matrix.latest }}
+        if: ${{ matrix.latest }}
         run: docker tag abenevaut/msys2:${{ steps.branch-name.outputs.SOURCE_TAG }}-w${{ env.windows_version }} abenevaut/msys2:latest
 
       - name: Publish images
