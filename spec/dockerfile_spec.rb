@@ -11,13 +11,15 @@ describe 'Dockerfile' do
 
     image = ::Docker::Image.build_from_dir(
       '.',
-      'dockerfile' => 'Dockerfile',
-      't' => 'abenevaut/msys2:rspec',
-      'cache-from' => 'abenevaut/msys2:latest-windows11'
+      {
+        'build-arg' => "SERVERCORE_TAG=ltsc2019",
+        't' => 'abenevaut/msys2:rspec',
+        'cache-from' => 'abenevaut/msys2:cache'
+      }
     )
 
-    set :os, family: :windows
-    set :backend, :docker
+    set :os, :family => 'windows'
+    set :backend, :cmd
     set :docker_image, image.id
   end
 
