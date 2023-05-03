@@ -20,8 +20,8 @@ RUN mklink /J C:\\msys64\\home\\ContainerUser C:\\Users\\ContainerUser \
   && setx HOME "C:\msys64\home\ContainerUser" \
   && setx /M path "%PATH%;C:\msys64\usr\local\bin;C:\msys64\usr\bin;C:\msys64\bin;C:\msys64\usr\bin\site_perl;C:\msys64\usr\bin\vendor_perl;C:\msys64\usr\bin\core_perl"
 
-RUN	bash -l -c "pacman -Syuu --needed --noconfirm" \
-  && bash -l -c "pacman -Syu --needed --noconfirm" \
+RUN	bash -l -c "pacman -Syuu --needed --noconfirm --noprogressbar" \
+  && bash -l -c "pacman -Syu --needed --noconfirm --noprogressbar" \
   && bash -l -c "rm -fr /c/Users/ContainerUser/* /var/cache/pacman/pkg/* /c/Windows/Temp/msys2-base.exe"
 
 WORKDIR C:\\msys64\\home\\ContainerUser\\

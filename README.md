@@ -4,19 +4,18 @@ Latest [MSYS2](https://www.msys2.org) based under Microsoft® Windows® Server D
 Currently, only [Server Core](https://hub.docker.com/_/microsoft-windows-servercore) is supported, as MSYS executables are unable to run under [Nano Server](https://hub.docker.com/_/microsoft-windows-nanoserver); please see [this issue](https://github.com/msys2/MSYS2-packages/issues/1493) for further information.
 
 ## Release
-| servercore tag | release tag                |
-|----------------|----------------------------|
-| ltsc2022   | latest OR latest-windows11 |
-| ltsc2019   | latest-windows10           |
+| servercore tag | release tag          |
+|----------------|----------------------|
+| ltsc2022   | latest OR latest-w11 |
+| ltsc2019   | latest-w10           |
 
 ## Usage
 MSYS (default) interactive shell
 
 The default workdir is `C:\msys64\home\ContainerUser\`. Set another workdir is recommended only for running non-interactive building process like `make`.
-
 ```
 docker run -it abenevaut/msys2
-docker run -it --volume=host-src:container-dest --workdir="container-dest" abenevaut/msys2 ls
+docker run -it --volume=host-src:container-dest --workdir="container-dest" abenevaut/msys2 make
 ```
 
 MinGW64 interactive shell
@@ -27,7 +26,6 @@ docker run -e MSYSTEM=MINGW64 abenevaut/msys2
 MinGW32 interactive shell
 
 If you want to use the MinGW32 environment, you must append `C:\msys64\mingw32\bin` (under CMD shell) to the PATH environment at runtime, or set in an Entrypoint script.
-
 ```
 docker run -e MSYSTEM=MINGW32 abenevaut/msys2
 ```
@@ -54,7 +52,7 @@ RUN bash -l -c "pacman -S base-devel msys2-devel mingw-w64-{i686,x86_64}-toolcha
 
 Servercore `ltsc2019` - Windows 10 compatible build
 ```
-FROM abenevaut/msys2:latest-windows10
+FROM abenevaut/msys2:latest-w10
 
 RUN bash -l -c "pacman -S base-devel msys2-devel mingw-w64-{i686,x86_64}-toolchain --needed --noconfirm --noprogressbar"
 ```
@@ -79,8 +77,11 @@ bundle install
 bundle exec rubocop
 # Lint Dockerfile
 docker run --rm -i hadolint/hadolint < Dockerfile
+
 # Test docker image
 DOCKER_HOST=tcp://127.0.0.1:2375 bundle exec rspec
+# OR
+SERVERCORE_TAG=ltsc2019 DOCKER_HOST=tcp://127.0.0.1:2375 bundle exec rspec
 ```
 
 ## Licensing
