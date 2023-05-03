@@ -1,6 +1,6 @@
-ARG TAG=ltsc2022
+ARG SERVERCORE_TAG=ltsc2022
 
-FROM mcr.microsoft.com/windows/servercore:$TAG
+FROM mcr.microsoft.com/windows/servercore:$SERVERCORE_TAG
 
 LABEL maintainer="Antoine Benevaut <me@abenevaut.dev>"
 
