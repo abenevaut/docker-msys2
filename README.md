@@ -14,11 +14,9 @@ MSYS (default) interactive shell
 
 The default workdir is `C:\msys64\home\ContainerUser\`. Set another workdir is recommended only for running non-interactive building process like `make`.
 
-Note: no toolchain are included in that image
-
 ```
 docker run -it abenevaut/msys2
-docker run -it --volume=host-src:container-dest --workdir="container-dest" abenevaut/msys2 make
+docker run -it --volume=host-src:container-dest --workdir="container-dest" abenevaut/msys2 ls
 ```
 
 MinGW64 interactive shell
@@ -28,13 +26,13 @@ docker run -e MSYSTEM=MINGW64 abenevaut/msys2
 
 MinGW32 interactive shell
 
-If you want to use the MinGW32 environment, you must append ``C:\msys64\mingw32\bin``(under CMD shell) to the PATH environment at runtime, or set in an Entrypoint script.
+If you want to use the MinGW32 environment, you must append `C:\msys64\mingw32\bin` (under CMD shell) to the PATH environment at runtime, or set in an Entrypoint script.
 
 ```
 docker run -e MSYSTEM=MINGW32 abenevaut/msys2
 ```
 
-You may use the shell of your preference by issuing your alternative CMD. For instance, Bash (``bash``) is the default CMD and shell; you may choose the Windows CMD (``cmd``) or Powershell (``powershell``)
+You may use the shell of your preference by issuing your alternative CMD. For instance, Bash (`bash`) is the default CMD and shell; you may choose the Windows CMD (`cmd`) or Powershell (`powershell`)
 
 CMD interactive shell
 ```
@@ -67,7 +65,7 @@ See also:
 
 ## Build
 ```
-docker build --build-arg VERSION=ltsc2019 -t <your tag> .
+docker build --build-arg TAG=ltsc2019 -t <your tag> .
 ```
 
 ## Testing
