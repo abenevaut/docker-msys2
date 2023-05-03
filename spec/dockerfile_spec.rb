@@ -18,7 +18,7 @@ describe 'Dockerfile' do
       }
     )
 
-    set :os, family => 'windows'
+    set :os, { 'family' => 'windows' }
     set :backend, :cmd
     set :docker_image, image.id
   end
