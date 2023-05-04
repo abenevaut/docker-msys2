@@ -54,6 +54,7 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
           bundle exec rubocop
-          setx SERVERCORE_TAG ${{ matrix.servercore_tag }}
-          setx DOCKER_HOST tcp://localhost:2375
           bundle exec rspec
+        env:
+          DOCKER_HOST: tcp://localhost:2375
+          SERVERCORE_TAG: ${{ matrix.servercore_tag }}
