@@ -88,3 +88,6 @@ SERVERCORE_TAG=ltsc2019 DOCKER_HOST=tcp://127.0.0.1:2375 bundle exec rspec
 * The **Dockerfile** has been released into the **public domain** (the Unlicense)
 * The MSYS2 packages are licensed under several licenses. Please refer to them
 * The Windows-based container base image usage is subjected to the **[Microsoft EULA](https://docs.microsoft.com/en-us/virtualization/windowscontainers/images-eula)**
+
+## Note
+- https://github.com/mizzy/serverspec/blob/master/WINDOWS_SUPPORT.md

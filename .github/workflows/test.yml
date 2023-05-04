@@ -22,7 +22,7 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [windows-2022, windows-2019]
+        os: [windows-2022]
         include:
           - os: windows-2019
             windows_version: 10
