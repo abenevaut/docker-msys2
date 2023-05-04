@@ -56,5 +56,5 @@ jobs:
           bundle exec rubocop
           bundle exec rspec
         env:
-          DOCKER_HOST: tcp://localhost:2375
+          DOCKER_HOST: tcp://127.0.0.1:2375
           SERVERCORE_TAG: ${{ matrix.servercore_tag }}
