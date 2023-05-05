@@ -93,3 +93,5 @@ SERVERCORE_TAG=ltsc2019 DOCKER_HOST=tcp://127.0.0.1:2375 bundle exec rspec
 
 ## Note
 - https://github.com/mizzy/serverspec/blob/master/WINDOWS_SUPPORT.md
+- https://stackoverflow.com/a/62773023/2090870
+- https://docs.docker.com/engine/security/protect-access/
