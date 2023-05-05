@@ -7,7 +7,8 @@ describe 'Dockerfile' do
   before(:all) do # rubocop:disable RSpec/BeforeAfterAll
     # On windows we use tcp protocol rather than unix socket to communicate with docker
     ::Docker.url = ENV['DOCKER_HOST'] || 'tcp://127.0.0.1:2375'
-    ::Docker.options[:read_timeout] = 3000
+    ::Docker.options[:read_timeout] = 1000
+    ::Docker.options[:write_timeout] = 1000
 
     image = ::Docker::Image.build_from_dir(
       '.',

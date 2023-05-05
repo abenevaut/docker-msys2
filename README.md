@@ -9,37 +9,39 @@ Currently, only [Server Core](https://hub.docker.com/_/microsoft-windows-serverc
 | ltsc2022   | latest OR latest-w11 |
 | ltsc2019   | latest-w10           |
 
+- [All release](https://hub.docker.com/r/abenevaut/msys2/tags)
+
 ## Usage
 MSYS (default) interactive shell
 
 The default workdir is `C:\msys64\home\ContainerUser\`. Set another workdir is recommended only for running non-interactive building process like `make`.
 ```
 docker run -it abenevaut/msys2
-docker run -it --volume=host-src:container-dest --workdir="container-dest" abenevaut/msys2 make
+docker run -it --volume=C:\\path\\to\\project:C:\\msys64\\home\\ContainerUser\\project --workdir="C:\\msys64\\home\\ContainerUser\\project" abenevaut/msys2 make
 ```
 
 MinGW64 interactive shell
 ```
-docker run -e MSYSTEM=MINGW64 abenevaut/msys2
+docker run -it -e MSYSTEM=MINGW64 abenevaut/msys2
 ```
 
 MinGW32 interactive shell
 
 If you want to use the MinGW32 environment, you must append `C:\msys64\mingw32\bin` (under CMD shell) to the PATH environment at runtime, or set in an Entrypoint script.
 ```
-docker run -e MSYSTEM=MINGW32 abenevaut/msys2
+docker run -it -e MSYSTEM=MINGW32 abenevaut/msys2
 ```
 
 You may use the shell of your preference by issuing your alternative CMD. For instance, Bash (`bash`) is the default CMD and shell; you may choose the Windows CMD (`cmd`) or Powershell (`powershell`)
 
 CMD interactive shell
 ```
-docker run abenevaut/msys2 cmd
+docker run -it abenevaut/msys2 cmd
 ```
 
 Powershell interactive shell
 ```
-docker run abenevaut/msys2 powershell
+docker run -it abenevaut/msys2 powershell
 ```
 
 ## Extending base image
