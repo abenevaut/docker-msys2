@@ -35,12 +35,10 @@ jobs:
       - name: Is docker ready to handle connection
         run: |
           net stop com.docker.service
-          
           dir C:\Users\runneradmin\.docker
           cat C:\Users\runneradmin\.docker\config.json
-          
-          cat C:\Users\runneradmin\AppData\Roaming\Docker\settings.json
-          
+          cd C:\
+          gci -recurse -filter "settings.json"          
           $dockerSettingPath = "C:\Users\runneradmin\.docker\settings.json"
           $settingsContent = Get-Content $dockerSettingPath -Raw | ConvertFrom-Json
           $settingsContent.exposeDockerAPIOnTCP2375 = $true
