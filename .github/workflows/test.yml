@@ -32,6 +32,9 @@ jobs:
 
       - uses: actions/checkout@v2
 
+      - name: Is docker ready to handle connection
+        run: docker -H tcp://localhost:2375 ps
+
       - name: Make cache image
         run: |
           docker pull --quiet abenevaut/msys2:latest-w${{ matrix.windows_version }}
