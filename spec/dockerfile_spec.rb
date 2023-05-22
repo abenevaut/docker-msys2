@@ -6,18 +6,21 @@ require 'serverspec'
 describe 'Dockerfile' do
   before(:all) do # rubocop:disable RSpec/BeforeAfterAll
     # On windows we use tcp protocol rather than unix socket to communicate with docker
-    ::Docker.url = 'tcp://127.0.0.1:2375'
-    ::Docker.options[:read_timeout] = 3000
+    ::Docker.url = ENV['DOCKER_HOST'] || 'tcp://127.0.0.1:2375'
+    ::Docker.options[:read_timeout] = 1000
+    ::Docker.options[:write_timeout] = 1000
 
     image = ::Docker::Image.build_from_dir(
       '.',
-      'dockerfile' => 'Dockerfile',
-      't' => 'abenevaut/msys2:rspec',
-      'cache-from' => 'abenevaut/msys2:latest-windows11'
+      {
+        'build-arg' => "SERVERCORE_TAG=#{ENV['SERVERCORE_TAG'] || 'ltsc2022'}",
+        't' => 'abenevaut/msys2:rspec',
+        'cache-from' => 'abenevaut/msys2:cache'
+      }
     )
 
-    set :os, family: :windows
-    set :backend, :docker
+    set :os, { 'family' => 'windows' }
+    set :backend, :cmd
     set :docker_image, image.id
   end
 

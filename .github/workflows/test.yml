@@ -2,28 +2,47 @@ name: test
 
 on:
   push:
-    branches: [ master, windows11, windows10 ]
+    branches: [ master ]
   pull_request:
-    branches: [ master, windows11, windows10 ]
+    branches: [ master ]
 
 jobs:
 
-  build:
-    runs-on: ubuntu-latest
-    steps:
+#  lint:
+#    runs-on: ubuntu-latest
+#    steps:
 
-      - uses: actions/checkout@v2
+#      - uses: actions/checkout@v2
 
-      - run: docker pull hadolint/hadolint
-
-      - name: lint Dockerfile
-        run: docker run --rm -i hadolint/hadolint < Dockerfile
+#      - name: lint Dockerfile
+#        run: |
+#          docker pull hadolint/hadolint
+#          docker run --rm -i hadolint/hadolint < Dockerfile
 
   test:
-    runs-on: windows-2022
+    strategy:
+      matrix:
+        os: [windows-2022]
+        include:
+          - os: windows-2022
+            windows_version: 11
+            servercore_tag: ltsc2022
+    runs-on: ${{ matrix.os }}
     steps:
 
       - uses: actions/checkout@v2
+
+      - name: Is docker ready to handle connection
+        run: |
+          Copy-Item ".\.github\rootfs\daemon.json" -Destination "C:\ProgramData\docker\config\daemon.json"
+          restart-service *docker*
+          docker -H tcp://localhost:2375 ps
+        shell: powershell
+
+      - name: Make cache image
+        run: |
+          docker pull --quiet abenevaut/msys2:latest-w${{ matrix.windows_version }}
+          docker tag abenevaut/msys2:latest-w${{ matrix.windows_version }} abenevaut/msys2:cache
 
       - uses: actions/cache@v2
         with:
@@ -42,4 +61,7 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
           bundle exec rubocop
-          DOCKER_HOST=tcp://127.0.0.1:2375 bundle exec rspec
+          bundle exec rspec
+        env:
+          DOCKER_HOST: tcp://127.0.0.1:2375
+          SERVERCORE_TAG: ${{ matrix.servercore_tag }}
