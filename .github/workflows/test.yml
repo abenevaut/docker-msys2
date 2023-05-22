@@ -35,11 +35,7 @@ jobs:
       - name: Is docker ready to handle connection
         run: |
           net stop com.docker.service
-          cat C:\ProgramData\docker\config\daemon.json
-          $dockerSettingPath = "C:\ProgramData\docker\config\daemon.json"
-          $settingsContent = Get-Content $dockerSettingPath -Raw | ConvertFrom-Json
-          $settingsContent.exposeDockerAPIOnTCP2375 = $true
-          $settingsContent | ConvertTo-Json | Set-Content $dockerSettingPath
+          Copy-Item ".\.github\rootfs\daemon.json" -Destination "C:\ProgramData\docker\config\daemon.json"
           net start com.docker.service
           docker -H tcp://localhost:2375 ps
         shell: powershell
