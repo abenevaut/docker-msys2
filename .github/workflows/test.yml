@@ -34,9 +34,8 @@ jobs:
 
       - name: Is docker ready to handle connection
         run: |
-          net stop com.docker.service
           Copy-Item ".\.github\rootfs\daemon.json" -Destination "C:\ProgramData\docker\config\daemon.json"
-          net start com.docker.service
+          restart-service *docker*
           docker -H tcp://localhost:2375 ps
         shell: powershell
 
