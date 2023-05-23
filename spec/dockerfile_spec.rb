@@ -10,14 +10,12 @@ describe 'Dockerfile' do
     ::Docker.options[:read_timeout] = 1000
     ::Docker.options[:write_timeout] = 1000
 
-    servercore_tag = ENV['SERVERCORE_TAG'] || 'ltsc2022'
-
     image = ::Docker::Image.build_from_dir(
       '.',
       {
-        'build-arg' => [
-          "SERVERCORE_TAG=#{servercore_tag}"
-        ],
+        'buildargs' => {
+         'SERVERCORE_TAG': ENV['SERVERCORE_TAG'] || 'ltsc2022'
+        },
         't' => 'abenevaut/msys2:rspec',
         'cache-from' => 'abenevaut/msys2:cache'
       }
