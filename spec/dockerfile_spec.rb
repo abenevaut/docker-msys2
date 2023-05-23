@@ -19,7 +19,7 @@ describe 'Dockerfile' do
       {
         't' => 'abenevaut/msys2:rspec',
         'cache-from' => 'abenevaut/msys2:cache',
-        'buildargs' => build_args,
+        'buildargs' => build_args
       }
     )
 
