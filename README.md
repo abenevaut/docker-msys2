@@ -64,8 +64,12 @@ See also:
 - [MSYS2 Pacman package management](https://www.msys2.org/docs/package-management/)
 
 ## Build
+
+- build arguments:
+  - SERVERCORE_TAG: ltsc2019 OR ltsc2022, default: ltsc2022
+
 ```
-docker build --build-arg TAG=ltsc2019 -t <your tag> .
+docker build --build-arg SERVERCORE_TAG=ltsc2019 -t <your tag> .
 ```
 
 ## Testing

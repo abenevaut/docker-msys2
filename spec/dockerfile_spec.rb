@@ -15,7 +15,9 @@ describe 'Dockerfile' do
     image = ::Docker::Image.build_from_dir(
       '.',
       {
-        'build-arg' => "SERVERCORE_TAG=#{servercore_tag}",
+        'build-arg' => [
+          "SERVERCORE_TAG=#{servercore_tag}"
+        ],
         't' => 'abenevaut/msys2:rspec',
         'cache-from' => 'abenevaut/msys2:cache'
       }
