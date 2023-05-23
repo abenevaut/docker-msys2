@@ -10,14 +10,16 @@ describe 'Dockerfile' do
     ::Docker.options[:read_timeout] = 1000
     ::Docker.options[:write_timeout] = 1000
 
+    build_args = JSON.generate(
+      'SERVERCORE_TAG': ENV['SERVERCORE_TAG'] || 'ltsc2022'
+    )
+
     image = ::Docker::Image.build_from_dir(
       '.',
       {
-        'buildargs' => {
-          'SERVERCORE_TAG' => ENV['SERVERCORE_TAG'] || 'ltsc2022'
-        },
         't' => 'abenevaut/msys2:rspec',
-        'cache-from' => 'abenevaut/msys2:cache'
+        'cache-from' => 'abenevaut/msys2:cache',
+        'buildargs' => build_args,
       }
     )
 
