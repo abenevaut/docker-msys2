@@ -35,7 +35,7 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: Is docker ready to handle connection
+      - name: Is docker ready to handle connection ?
         run: |
           Copy-Item ".\.github\rootfs\daemon.json" -Destination "C:\ProgramData\docker\config\daemon.json"
           restart-service *docker*
