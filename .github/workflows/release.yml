@@ -22,7 +22,7 @@ jobs:
             servercore_tag: ltsc2022
             latest: true
     concurrency:
-      group: release
+      group: release-${{ matrix.servercore_tag }}
       cancel-in-progress: false
     steps:
 

@@ -33,7 +33,7 @@ jobs:
             windows_version: 11
             servercore_tag: ltsc2022
     concurrency:
-      group: test-${{ github.workflow }}-${{ github.ref }}
+      group: test-${{ github.workflow }}-${{ github.ref }}-${{ matrix.servercore_tag }}
       cancel-in-progress: true
     steps:
 
