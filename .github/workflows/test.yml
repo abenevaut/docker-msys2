@@ -20,19 +20,26 @@ jobs:
 #          docker run --rm -i hadolint/hadolint < Dockerfile
 
   test:
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: true
       matrix:
-        os: [windows-2022]
+        os: [windows-2022, windows-2019]
         include:
+          - os: windows-2019
+            windows_version: 10
+            servercore_tag: ltsc2019
           - os: windows-2022
             windows_version: 11
             servercore_tag: ltsc2022
-    runs-on: ${{ matrix.os }}
+    concurrency:
+      group: test-${{ github.workflow }}-${{ github.ref }}-${{ matrix.servercore_tag }}
+      cancel-in-progress: true
     steps:
 
       - uses: actions/checkout@v2
 
-      - name: Is docker ready to handle connection
+      - name: Is docker ready to handle connection ?
         run: |
           Copy-Item ".\.github\rootfs\daemon.json" -Destination "C:\ProgramData\docker\config\daemon.json"
           restart-service *docker*

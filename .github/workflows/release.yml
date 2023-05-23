@@ -8,7 +8,9 @@ on:
 jobs:
 
   build:
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: true
       matrix:
         os: [windows-2022, windows-2019]
         include:
@@ -19,7 +21,9 @@ jobs:
             windows_version: 11
             servercore_tag: ltsc2022
             latest: true
-    runs-on: ${{ matrix.os }}
+    concurrency:
+      group: release-${{ matrix.servercore_tag }}
+      cancel-in-progress: false
     steps:
 
       - uses: actions/checkout@v2
