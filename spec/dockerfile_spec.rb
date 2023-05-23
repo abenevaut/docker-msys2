@@ -2,6 +2,7 @@
 
 require 'docker'
 require 'serverspec'
+require 'json'
 
 describe 'Dockerfile' do
   before(:all) do # rubocop:disable RSpec/BeforeAfterAll
