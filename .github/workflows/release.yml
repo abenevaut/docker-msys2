@@ -42,7 +42,7 @@ jobs:
 
       - name: Tag latest
         if: ${{ matrix.latest }}
-        run: docker tag abenevaut/msys2:latest-w${{ env.windows_version }} abenevaut/msys2:latest
+        run: docker tag abenevaut/msys2:latest-w${{ matrix.windows_version }} abenevaut/msys2:latest
 
       - name: Publish images
         run: docker push --all-tags abenevaut/msys2
