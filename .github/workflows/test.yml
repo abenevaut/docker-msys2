@@ -20,7 +20,9 @@ jobs:
 #          docker run --rm -i hadolint/hadolint < Dockerfile
 
   test:
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: true
       matrix:
         os: [windows-2022, windows-2019]
         include:
@@ -30,7 +32,9 @@ jobs:
           - os: windows-2022
             windows_version: 11
             servercore_tag: ltsc2022
-    runs-on: ${{ matrix.os }}
+    concurrency:
+      group: test-${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
     steps:
 
       - uses: actions/checkout@v2
