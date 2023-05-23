@@ -14,7 +14,7 @@ describe 'Dockerfile' do
       '.',
       {
         'buildargs' => {
-         'SERVERCORE_TAG': ENV['SERVERCORE_TAG'] || 'ltsc2022'
+          'SERVERCORE_TAG': ENV['SERVERCORE_TAG'] || 'ltsc2022'
         },
         't' => 'abenevaut/msys2:rspec',
         'cache-from' => 'abenevaut/msys2:cache'
