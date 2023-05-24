@@ -28,6 +28,9 @@ RUN	bash -l -c " " \
 
 WORKDIR C:\\msys64\\home\\ContainerUser\\
 
+COPY LICENSE LICENSE
+COPY README.md README.md
+
 # SHELL ["C:\\msys64\\usr\\bin\\bash.exe", "-l", "-c"]
 
 CMD ["C:\\msys64\\usr\\bin\\bash.exe", "--login", "-i", "-l"]

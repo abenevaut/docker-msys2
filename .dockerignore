@@ -1,9 +1,10 @@
+.idea
 .git
 .github
-spec
-vendor
 .gitignore
-.rspec
-.rubocop.yml
 Gemfile
 Gemfile.lock
+spec
+.rspec
+.rubocop.yml
+vendor
